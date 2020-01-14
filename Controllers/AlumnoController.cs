@@ -32,7 +32,7 @@ namespace Curso_de_ASP.NET_Core.Controllers
                                from a1 in apellido1
                                select new Alumno { Nombre = $"{n1} {n2} {a1}" };
                                
-            return listaAlumnos.OrderBy((al) => al.UniqueId).Take(cantidad).ToList();
+            return listaAlumnos.OrderBy((al) => al.Id).Take(cantidad).ToList();
         }
     }
 }

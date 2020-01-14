@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace Curso_de_ASP.NET_Core.Models
 {
-    public class Escuela : ObjetoEscuelaBase, ILugar
-    {
+    public class Escuela : ObjetoEscuelaBase
+    {           
         public int AñoDeCreación { get; set; }
 
         public string Pais { get; set; }
@@ -24,10 +24,13 @@ namespace Curso_de_ASP.NET_Core.Models
             Pais = pais;
             Ciudad = ciudad;
         }
+        public Escuela()
+        {
 
+        }
         public override string ToString()
         {
             return $"Nombre: \"{Nombre}\", Tipo: {TipoEscuela} {System.Environment.NewLine} Pais: {Pais}, Ciudad:{Ciudad}";
-        }  
+        }
     }
 }

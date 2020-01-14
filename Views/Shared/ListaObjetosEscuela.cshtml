@@ -1,19 +1,6 @@
-﻿@model List<Alumno>
+﻿@* @model List<ObjetoEscuelaBase> *@
 
-@{
-    ViewData["Title"] = "Información Alumno";
-    Layout="Simple";
-}
-
-@* @foreach(var alumno in Model)
-{
-    <partial name="ObjetoEscuelaSimple" model="alumno"></partial>
-} *@
-
-
-<partial name="ListaObjetosEscuela"/>
-
-@* <div class="Container">
+<div class="Container">
     <table class="tablaAlumnos">
         <thead>
             <tr>
@@ -23,11 +10,11 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(var alumno in Model)
+            @foreach(var objeto in Model)
             {
                 <tr>
-                    <td>@alumno.Nombre</td>
-                    <td>@alumno.UniqueId</td>
+                    <td>@objeto.Nombre</td>
+                    <td>@objeto.Id</td>
                     <td>
                         <figure class="project-image-container">
                             <img class="project-image" alt="Imagen de Alumno">
@@ -37,5 +24,4 @@
             }
         </tbody>
     </table>
-</div> *@
-
+</div>
