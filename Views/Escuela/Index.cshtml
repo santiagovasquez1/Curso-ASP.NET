@@ -1,0 +1,24 @@
+﻿@model Escuela
+
+@{
+    ViewData["Title"] = "Información Escuela";
+    Layout="Simple";
+}
+<section id="portafolio" class="portfolio">
+    <div class="Container">
+        <h2 class="Escuela">Escuela: @ViewData["Title"]</h2>        
+        <h2>Nombre : @Model.Nombre </h2> 
+        <h2>Año fundación: @Model.AñoDeCreación</h2>  
+        <article class="project">
+                <div class="project-details">
+                    <h3 class="project-title"> <strong>Curso: </strong></h3>                    
+                    <p class="project-description">Programa para el diseño, despiece y dibujo autmatico de muros de
+                        concreto
+                        <br> siguiendo todos los parametros de la NSR10</p>
+                </div>
+                <figure class="project-image-container">
+                    <img class="project-image" src="~/images/platzi-video-react-native.png" alt="React js" width="500">
+                </figure>
+        </article>
+    </div>
+</section>
