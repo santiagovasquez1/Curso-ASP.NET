@@ -168,6 +168,30 @@ figure {
     margin: 0;
 }
 
+.tablaAlumnos {
+    border: 1px solid grey;
+    margin: 30px;
+    padding: 20px;
+    font-size: 15px;
+    text-align: left;
+    display: table;
+    align-items: center;
+    justify-content: left;
+}
+
+.encabezado {
+    border: 1px solid grey;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background: #026fff;
+    font-size: 20px;
+    text-transform: uppercase;
+    text-rendering: optimizeLegibility;
+    border-spacing: 0px;
+    border-collapse: collapse;
+}
+
 
 /* .flexbox {
     display: flex;
