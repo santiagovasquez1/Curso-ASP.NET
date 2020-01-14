@@ -4,6 +4,7 @@ namespace Curso_de_ASP.NET_Core.Models
 {
     public class Asignatura : ObjetoEscuelaBase
     {
+        public string Descripicion { get; set; }
         public override bool Equals(object obj)
         {
             if (obj is Asignatura)

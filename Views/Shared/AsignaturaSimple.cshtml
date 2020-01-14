@@ -1,0 +1,17 @@
+﻿@model Asignatura
+
+<section id="portafolio" class="portfolio">
+    <div class="Container">
+        <h2>@ViewData["Title"]</h2>        
+        <h3>Nombre : @Model.Nombre </h2>  
+        <p><i>@ViewBag.Fecha</i></p>
+        <article class="project">
+                <div class="project-details">          
+                    <p class="project-description">@Model.Descripicion</p>
+                </div>
+                <figure class="project-image-container">
+                    <img class="project-image" src="~/images/platzi-video-react-native.png" alt="React js" width="500">
+                </figure>
+        </article>
+    </div>
+</section>

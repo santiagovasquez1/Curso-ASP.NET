@@ -7,8 +7,14 @@
 <section id="portafolio" class="portfolio">
     <div class="Container">
         <h2 class="Escuela">Escuela: @ViewData["Title"]</h2>        
-        <h2>Nombre : @Model.Nombre </h2> 
-        <h2>Año fundación: @Model.AñoDeCreación</h2>  
+        <h3>Nombre : @Model.Nombre </h2> 
+        <h3>Año fundación: @Model.AñoDeCreación</h3>
+        <h3>Tipo de Escuela: @Model.TipoEscuela</h3>  
+        <address class="Direccion">
+            <P>Dirección: @Model.Direccion</P>
+            <p>País: @Model.Pais</p>
+            <p>Ciudad: @Model.Ciudad</p>
+        </address>
         <article class="project">
                 <div class="project-details">
                     <h3 class="project-title"> <strong>Curso: </strong></h3>                    
