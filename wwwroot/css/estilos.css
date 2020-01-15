@@ -168,14 +168,13 @@ figure {
     margin: 0;
 }
 
-.tablaAlumnos {
+.tablaEscuela {
     border: 1px solid grey;
     margin: 30px;
     padding: 20px;
     font-size: 15px;
     text-align: left;
-    display: table;
-    align-items: center;
+    /* align-items: center; */
     justify-content: left;
 }
 
@@ -192,19 +191,52 @@ figure {
     border-collapse: collapse;
 }
 
-
-/* .flexbox {
-    display: flex;
-    flex-wrap: wrap;
+.Formulario {
+    margin: 20px;
+    height: 500px;
+    display: flexbox;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid grey;
+    border-radius: 10px;
 }
 
-.box {
-    width: 20px;
-    height: 20px;
-    border: 1px solid red;
-    flex-shrink: 0;
-    margin: 5px;
-} */
+.Form-Campos {
+    margin: auto;
+    padding: 20px;
+    display: flexbox;
+}
+
+.Form-Campos label {
+    font-weight: bold;
+    color: #1b2127;
+}
+
+.Form-Campos button {
+    padding: 10px 0px;
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    border-radius: 5px;
+    width: 100px;
+    margin-top: 10px;
+    /* margin: 10px auto 0; */
+}
+
+.table-edicion {
+    display: flex;
+    justify-content: space-between;
+}
+
+.table-edicion button {
+    padding: 10px 0px;
+    display: block;
+    margin-top: 10px;
+    border-radius: 5px;
+    width: 50px;
+    margin-top: 10px;
+}
 
 .experience {
     display: flex;

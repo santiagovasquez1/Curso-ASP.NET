@@ -6,24 +6,26 @@
 }
 
 @* Validacion de datos *@
-<div class="Container">
-    <div asp-validation-summary="All"></div>
+<div class="Container">    
     <form class="Formulario" method="POST">
-        <div class=Form-Nombre>
+        <div asp-validation-summary="All"></div>
+        <div class="Form-Campos">
             <label asp-for="Nombre"></label>
             <input asp-for="Nombre"/>
         </div>
-        <div class=Form-Direccion>
+        <div class="Form-Campos">
             <label asp-for="Direccion"></label>
             <input asp-for="Direccion"/>
         </div>
-        <div class=Form-Jornada>
+        <div class="Form-Campos">
             <label asp-for="Jornada"></label>
             @Html.DropDownList("Jornada",Html.GetEnumSelectList<TiposJornada>(),
                                 "Seleccione Jornada",
                                 new {@class ="form-control"}            
                                 )
         </div>
-        <input type="submit"/>
+        <div class="Form-Campos">
+            <button type="submit">Enviar</button>
+        </div>
     </form>
 </div>

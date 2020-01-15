@@ -46,6 +46,82 @@ namespace Curso_de_ASP.NET_Core.Controllers
             return listaAlumnos.OrderBy((al) => al.Id).Take(cantidad).ToList();
         }
 
+        #region Crear
+        public IActionResult Create()
+        {
+            ViewBag.Fecha = DateTime.Now;
+            return View("Create");
+        }
+
+        [HttpPost]
+        public IActionResult Create(Alumno alumno)
+        {
+            ViewBag.Fecha = DateTime.Now;
+
+            if (ModelState.IsValid)
+            {
+                _context.Alumnos.Add(alumno);
+                _context.SaveChanges();
+                ViewBag.Mensaje = "Alumno Creado";
+                return View("Index", alumno);
+            }
+            else
+            {
+                return View(alumno);
+            }
+
+        }
+        #endregion
+
+        #region  Editar
+        [Route("Alumno/Index/{alumnoId}")]
+        public IActionResult Edit(string alumnoId)
+        {
+            if (!string.IsNullOrWhiteSpace(alumnoId))
+            {
+                var Alumno = _context.Alumnos.ToList().Find(x => x.Id == alumnoId);
+                _context.Alumnos.Update(Alumno);
+                 _context.SaveChanges();
+                return View("Edit", Alumno);
+            }
+            else
+            {
+                return Content("Los datos proporcionados no son suficientes");
+            }
+        }
+
+        #endregion
+
+        #region Eliminar
+        public IActionResult Eliminar(string alumnoId)
+        {
+            if (!string.IsNullOrWhiteSpace(alumnoId))
+            {
+                var Alumno = _context.Alumnos.ToList().Find(x => x.Id == alumnoId);
+                _context.Alumnos.Remove(Alumno);
+                _context.SaveChanges();
+                return View("MultiAlumno", _context.Alumnos);
+            }
+            else
+            {
+                return Content("Los datos proporcionados no son suficientes");
+            }
+
+        }
+
+
+        #endregion
+
+        private Alumno GetAlumno(string pAlumnoId)
+        {
+
+            var alumnosResults = from alumno in _context.Alumnos
+                                 where alumno.Id == pAlumnoId
+                                 select alumno;
+
+            return alumnosResults.SingleOrDefault();
+        }
+
         public AlumnoController(EscuelaContext context)
         {
             _context = context;
