@@ -25,7 +25,6 @@ namespace Curso_de_ASP.NET_Core
 
                 try
                 {
-
                     var context = services.GetRequiredService<EscuelaContext>();
                     context.Database.EnsureCreated();
                 }

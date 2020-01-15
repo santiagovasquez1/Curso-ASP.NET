@@ -8,17 +8,18 @@ namespace Curso_de_ASP.NET_Core.Controllers
 {
     public class AlumnoController : Controller
     {
+        private EscuelaContext _context;
         public IActionResult Index()
         {
-            var Alumno = new Alumno { Nombre = "Santiago Vásquez" };
-            return View(Alumno);
+            //var Alumno = new Alumno { Nombre = "Santiago Vásquez" };
+            return View(_context.Alumnos.FirstOrDefault());
         }
         public IActionResult MultiAlumno()
         {
-            var listaAlumno = GenerarAlumnosAlAzar(20);
+            //var listaAlumno = GenerarAlumnosAlAzar(1500);
             ViewBag.Fecha = DateTime.Now;
             ViewBag.CosaDinamica = "La Monja";
-            return View("MultiAlumno", listaAlumno);
+            return View("MultiAlumno", _context.Alumnos);
         }
 
         private List<Alumno> GenerarAlumnosAlAzar(int cantidad)
@@ -31,8 +32,13 @@ namespace Curso_de_ASP.NET_Core.Controllers
                                from n2 in nombre2
                                from a1 in apellido1
                                select new Alumno { Nombre = $"{n1} {n2} {a1}" };
-                               
+
             return listaAlumnos.OrderBy((al) => al.Id).Take(cantidad).ToList();
+        }
+
+        public AlumnoController(EscuelaContext context)
+        {
+            _context = context;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Curso_de_ASP.NET_Core.Models
 
         public ObjetoEscuelaBase()
         {
-            //Id = Guid.NewGuid().ToString();
+            Id = Guid.NewGuid().ToString();
         }
 
         public override string ToString()
