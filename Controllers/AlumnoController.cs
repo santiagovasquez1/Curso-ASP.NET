@@ -9,10 +9,20 @@ namespace Curso_de_ASP.NET_Core.Controllers
     public class AlumnoController : Controller
     {
         private EscuelaContext _context;
-        public IActionResult Index()
+        [Route("Alumno/Index")]
+        [Route("Alumno/Index/{alumnoId}")]
+        public IActionResult Index(string alumnoId)
         {
-            //var Alumno = new Alumno { Nombre = "Santiago Vásquez" };
-            return View(_context.Alumnos.FirstOrDefault());
+            if (!string.IsNullOrWhiteSpace(alumnoId))
+            {
+                var Alumno = _context.Alumnos.ToList().Find(x => x.Id == alumnoId);
+                return View(Alumno);
+            }
+            else
+            {
+                return View("MultiAlumno", _context.Alumnos);
+            }
+
         }
         public IActionResult MultiAlumno()
         {

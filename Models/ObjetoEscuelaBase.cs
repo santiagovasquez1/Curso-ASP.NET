@@ -4,8 +4,8 @@ namespace Curso_de_ASP.NET_Core.Models
 {
     public abstract class ObjetoEscuelaBase
     {
-        public string Id { get;  set; }
-        public string Nombre { get; set; }
+        public string Id { get; set; }
+        public virtual string Nombre { get; set; }
 
         public string Descripicion { get; set; } = "";
 
