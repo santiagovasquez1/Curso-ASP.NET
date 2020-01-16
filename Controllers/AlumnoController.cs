@@ -10,12 +10,13 @@ namespace Curso_de_ASP.NET_Core.Controllers
     {
         private EscuelaContext _context;
         [Route("Alumno/Index")]
-        [Route("Alumno/Index/{alumnoId}")]
-        public IActionResult Index(string alumnoId)
+        [Route("Alumno/Index/{Id}")]
+        public IActionResult Index(string Id)
         {
-            if (!string.IsNullOrWhiteSpace(alumnoId))
+            if (!string.IsNullOrWhiteSpace(Id))
             {
-                var Alumno = _context.Alumnos.ToList().Find(x => x.Id == alumnoId);
+                var Alumno = _context.Alumnos.ToList().Find(x => x.Id == Id);
+                ViewBag.CursoNombre = _context.Cursos.ToList().Find(x => x.Id == Alumno.CursoId).Nombre;
                 return View(Alumno);
             }
             else
@@ -74,14 +75,13 @@ namespace Curso_de_ASP.NET_Core.Controllers
         #endregion
 
         #region  Editar
-        [Route("Alumno/Index/{alumnoId}")]
-        public IActionResult Edit(string alumnoId)
+        [Route("Alumno/Edit/{Id}")]
+        public IActionResult Edit(string Id)
         {
-            if (!string.IsNullOrWhiteSpace(alumnoId))
+            if (!string.IsNullOrWhiteSpace(Id))
             {
-                var Alumno = _context.Alumnos.ToList().Find(x => x.Id == alumnoId);
-                _context.Alumnos.Update(Alumno);
-                 _context.SaveChanges();
+                var Alumno = _context.Alumnos.ToList().Find(x => x.Id == Id);                 
+                ViewBag.Cursos = _context.Cursos.ToArray().Select(x => x.Id).ToArray();
                 return View("Edit", Alumno);
             }
             else
@@ -90,6 +90,28 @@ namespace Curso_de_ASP.NET_Core.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("Alumno/Edit/{alumnoId}")]
+        public IActionResult Edit(Alumno alumno, string alumnoId)
+        {
+            ViewBag.Fecha = DateTime.Now;
+
+            if (ModelState.IsValid)
+            {                
+                var cursoAlumno = _context.Cursos.ToList().Find(x => x.Id == alumno.CursoId);
+                alumno.Id = alumnoId;
+                alumno.Curso = cursoAlumno;
+                _context.Alumnos.Update(alumno);
+                _context.SaveChanges();
+                ViewBag.CursoNombre = _context.Cursos.ToList().Find(x => x.Id == alumno.CursoId).Nombre;
+                return View("Index", alumno);
+            }
+            else
+            {
+                return View("Edit", alumno);
+            }
+
+        }
         #endregion
 
         #region Eliminar

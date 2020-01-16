@@ -58,7 +58,10 @@ namespace Curso_de_ASP.NET_Core.Controllers
             }
 
         }
-
+        public static void Prueba(ObjetoEscuelaBase obj)
+        {
+    
+        }
         public CursoController(EscuelaContext context)
         {
             _context = context;

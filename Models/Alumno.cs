@@ -7,6 +7,7 @@ namespace Curso_de_ASP.NET_Core.Models
     {
         [Required]
         public override string Nombre { get; set; }
+        [Required]
         public string CursoId { get; set; }
         public Curso Curso { get; set; }
         public List<Evaluación> Evaluaciones { get; set; }

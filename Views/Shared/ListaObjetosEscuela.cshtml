@@ -1,7 +1,7 @@
 ﻿@* @model List<ObjetoEscuelaBase> *@
 
 @{
-    var controller = ViewBag.Controller;
+    string controller = "Escuela";
 }
 
 <div class="Container">
@@ -15,33 +15,46 @@
         </thead>
         <tbody>
             @foreach(var ObjetoEscuela in Model)
-            {
+            {   
+                @if(ObjetoEscuela is Alumno)
+                {
+                    controller ="Alumno";
+                }
+                 @if(ObjetoEscuela is Asignatura)
+                {
+                    controller ="Asignatura";
+                }
+                 @if(ObjetoEscuela is Curso)
+                {
+                    controller ="Curso";
+                }
+
                 <tr>
                     <td>@ObjetoEscuela.Nombre</td>
                     <td>@ObjetoEscuela.Id</td>
                     <td>
+                        @Html.ActionLink("Detalles",@"Index",new{id=ObjetoEscuela.Id})
+                    </td>
+                    <td>
                         <div class="table-edicion">
-                            <a asp-controller=@controller
+                            <a  asp-controller=@controller
                                 asp-action="index"
                                 asp-route-id=@ObjetoEscuela.Id
                                 class="btn btn-secondary btn-sm ml-2">
                                 Detalles
                             </a>
-                            <a asp-controller=@controller
+                            <a  asp-controller=@controller
                                 asp-action="edit"
                                 asp-route-id=@ObjetoEscuela.Id
                                 class="btn btn-info btn-sm ml-2">
                                 Editar
                             </a>
-                            <a asp-controller=@controller
+                            <a  asp-controller=@controller
                                 asp-action="delete"
                                 asp-route-id=@ObjetoEscuela.Id
                                 class="btn btn-danger btn-sm ml-2">
                                 Eliminar
                             </a>
-                            @* <button type="submit" href>Editar</button>                    
-                            <button type="submit">Ver</button>             
-                            <button type="submit">Eliminar</button> *@
                         </div>
                     </td>
                 </tr>
@@ -49,3 +62,5 @@
         </tbody>
     </table>
 </div>
+
+

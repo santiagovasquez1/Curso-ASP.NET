@@ -16,5 +16,6 @@ namespace Curso_de_ASP.NET_Core.Models
         public string EscuelaId { get; set; }
 
         public Escuela Escuela { get; set; }
+   
     }
 }
