@@ -10,12 +10,12 @@ namespace Curso_de_ASP.NET_Core.Controllers
     {
         private EscuelaContext _context;
         [Route("Curso/Index")]
-        [Route("Curso/Index/{cursoId}")]
-        public IActionResult Index(string cursoId)
+        [Route("Curso/Index/{Id}")]
+        public IActionResult Index(string Id)
         {
-            if (!string.IsNullOrWhiteSpace(cursoId))
+            if (!string.IsNullOrWhiteSpace(Id))
             {
-                var Curso = _context.Cursos.ToList().Find(x => x.Id == cursoId);
+                var Curso = _context.Cursos.ToList().Find(x => x.Id == Id);
                 return View(Curso);
             }
             else
@@ -31,7 +31,7 @@ namespace Curso_de_ASP.NET_Core.Controllers
             ViewBag.CosaDinamica = "La Monja";
             return View("MultiAlumno", _context.Cursos);
         }
-
+        #region Crear
         public IActionResult Create()
         {
             ViewBag.Fecha = DateTime.Now;
@@ -58,10 +58,45 @@ namespace Curso_de_ASP.NET_Core.Controllers
             }
 
         }
-        public static void Prueba(ObjetoEscuelaBase obj)
+        #endregion
+
+        #region Editar
+        [Route("Curso/Edit/{Id}")]
+        public IActionResult Edit(string Id)
         {
-    
+            if (!string.IsNullOrWhiteSpace(Id))
+            {
+                var Curso = _context.Cursos.ToList().Find(x => x.Id == Id);
+                //ViewBag.Cursos = _context.Cursos.ToArray().Select(x => x.Id).ToArray();
+                return View("Edit", Curso);
+            }
+            else
+            {
+                return Content("Los datos proporcionados no son suficientes");
+            }
         }
+
+        [HttpPost]
+        [Route("Curso/Edit/{cursoId}")]
+        public IActionResult Edit(Curso curso, string cursoId)
+        {
+            ViewBag.Fecha = DateTime.Now;
+
+            if (ModelState.IsValid)
+            {
+                curso.Id = cursoId;
+                _context.Cursos.Update(curso);
+                _context.SaveChanges();
+                return View("Index", curso);
+            }
+            else
+            {
+                return View("Edit", curso);
+            }
+
+        }
+
+        #endregion
         public CursoController(EscuelaContext context)
         {
             _context = context;

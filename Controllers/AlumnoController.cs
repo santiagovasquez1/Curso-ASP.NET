@@ -50,6 +50,7 @@ namespace Curso_de_ASP.NET_Core.Controllers
         #region Crear
         public IActionResult Create()
         {
+            ViewBag.Cursos = _context.Cursos.ToArray().Select(x => x.Id).ToArray();
             ViewBag.Fecha = DateTime.Now;
             return View("Create");
         }
@@ -64,10 +65,12 @@ namespace Curso_de_ASP.NET_Core.Controllers
                 _context.Alumnos.Add(alumno);
                 _context.SaveChanges();
                 ViewBag.Mensaje = "Alumno Creado";
+                ViewBag.CursoNombre = _context.Cursos.ToList().Find(x => x.Id == alumno.CursoId).Nombre;
                 return View("Index", alumno);
             }
             else
             {
+                ViewBag.Cursos = _context.Cursos.ToArray().Select(x => x.Id).ToArray();
                 return View(alumno);
             }
 
