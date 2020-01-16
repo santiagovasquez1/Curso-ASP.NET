@@ -5,25 +5,4 @@
     Layout="Simple";
 }
 
-<h1>Desde la vista normal</h1>
-<section id="portafolio" class="portfolio">
-    <div class="Container">
-        <h2>@ViewData["Title"]</h2>        
-        <h3>Nombre : @Model.Nombre </h2>  
-        <p><i>@ViewBag.Fecha</i></p>
-        <article class="project">
-                <div class="project-details">          
-                    <p class="project-description"><strong>Fundamentos de Programación</strong> es una asignatura básica que permite crear programas
-                    <br>que exhiban un comportamiento deseado. El proceso de escribir código requiere frecuentemente conocimientos en varias áreas distintas,
-                    <br>además del dominio del lenguaje a utilizar, algoritmos especializados y lógica formal.</p>
-                </div>
-                <figure class="project-image-container">
-                    <img class="project-image" src="~/images/platzi-video-react-native.png" alt="React js" width="500">
-                </figure>
-        </article>
-    </div>
-</section>
-
-<h1>Desde la vista parcial</h1>
-@* Tag helper *@
 <partial name="ObjetoEscuelaSimple"></partial>

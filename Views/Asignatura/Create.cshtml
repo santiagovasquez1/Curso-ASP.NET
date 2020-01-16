@@ -1,0 +1,34 @@
+﻿@model Asignatura
+
+@{
+    ViewData["Title"] = "Creación de Asignatura";
+    Layout="Simple";
+}
+
+@* Validacion de datos *@
+<div class="Container">    
+    <form class="Formulario" method="POST">
+        <div asp-validation-summary="All"></div>
+        <div class="Form-Campos">
+            <label asp-for="Nombre"></label>
+            <input asp-for="Nombre"/>
+        </div>
+        <div class="Form-Campos">
+            <label asp-for="CursoId"></label>
+            @Html.DropDownList("CursoId",new SelectList(@ViewBag.Cursos),
+                                "Seleccione Curso",
+                                new {@class ="form-control"}            
+                                )
+        </div>
+        <div class="Form-Campos">
+            <label asp-for="Descripicion"></label>
+            @Html.TextBox("Descripicion",
+                            "Descripción del curso,",
+                            new {@class ="form-control"} 
+                            )
+        </div>
+        <div class="Form-Campos">
+            <button type="submit">Enviar</button>
+        </div>
+    </form>
+</div>

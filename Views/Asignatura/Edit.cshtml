@@ -1,0 +1,35 @@
+﻿@model Asignatura
+
+@{
+    ViewData["Title"] = "Información Asignatura";
+    Layout="Simple";
+}
+
+<section id="portafolio" class="portfolio">
+    <div class="Container">
+        <h2>@ViewData["Title"]</h2>     
+        <article class="project">
+            <form class="Formulario" method="POST">
+                <div asp-validation-summary="All"></div>
+                <div class="Form-Campos">
+                    <label asp-for="Nombre"></label>
+                    <input asp-for="Nombre"/>
+                </div>
+                <div class="Form-Campos">
+                    <label asp-for="CursoId"></label>
+                    @Html.DropDownList("CursoId",new SelectList(@ViewBag.Cursos),
+                                        "Seleccione Curso",
+                                        new {@class ="form-control"}            
+                                        )
+                </div>
+                <div class="Form-Campos">
+                    <label asp-for="Descripicion"></label>
+                    <input asp-for="Descripicion"/>
+                </div>
+                <div class="Form-Campos">
+                    <button type="submit">Enviar</button>
+                </div>
+            </form>
+        </article>
+    </div>
+</section>
