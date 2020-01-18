@@ -1,0 +1,104 @@
+El middleware en un sitio web es: Expone el servicio Web y controla la ejecución
+
+2
+Para ejecutar una aplicación web con https de manera local para depuración, es necesario: Instalar los certificados web que vienen con las herramientas dotnet
+
+3 Incorrecto
+Desde el punto de vista de la estructura de directorios, una aplicación web hecha con net Core se puede considerar: Un Hibrido entre CloudComputing y pc computing
+
+4
+MVC es el acrónimo de: Model View controller
+
+5 Incorrecto
+Una conjunto de vistas “Platzi” debe tener un controllador:PlatziController
+
+6
+Un Modelo es una clase que debe heredar de : No es necesaria ninguna clase de herencia
+
+7
+Razor es: Una modificacion de la sintaxis de C# para ser usado dentro de Html
+
+8
+Se puede crear una vista que reutilice todo el contenido y lógica definidos en otra vista, todo esto haciendo uso de: Layouts
+
+9
+Son usados para enviar información desde el controlador a la vista: Model-ViewBag,ViewData
+
+10
+Si quiero reutilizat un fragmento .cshtml dentro de otra vista puedo invocarlo por medio de:
+<partial></partial>
+
+11
+Para acceder al modelo desde una Vista se hace uso de la sentencia: @Model
+
+12
+Linq es un lenguaje de programación para consultar bases de datos: Falso
+
+13 Incorrecto
+Linq es una extensión del lenguaje C# que le adiciona funcionalidades declarativas: Falso
+
+14
+Si quiero que el resultado de una consulta con Linq no me devuelva elementos duplicados debo hacer uso del método: Distinct
+
+15
+Entity Framework Core es un ORM: Verdadero
+
+16 Incorrecto
+EF Core es un componente de ASP.net Core: Verdadero
+
+17
+El modelo de ASP.Net Core tiene que ser un modelo diferente al usado por EF Core: Falso
+
+18
+Las DataAnnotations solo tienen influencia en la Vista y el Controlador, no en EF Core: Falso
+
+19
+Debo saber el lenguaje de consulta de cada base de datos para hacer uso de EF Core: Falso
+
+20
+EF Core ya incluye soporte para Base de datos en memoria: Verdadero
+
+21
+Cualquier proveedor de BD puede crear soporte para EF Core: Verdadero
+
+22
+La compañía Big Mouth desea crear un sitio web utilizando tecnología de punta, sus consultores le han indicado que si quiere hacer un sitio serio , altamente escalable , robusto, fácil de mantener y escalable a nivel de código deberían utilizar ASP.Net core. Al líder técnico le preocupa tener que hacer las validaciones de datos 2 veces , una vez en el backend y otra en el front end. Como consultor externo usted le recomienda:
+Usar librerias jquery
+
+23
+Monsters Inc, una reconocida marca de puertas para armario ,lo ha contratado para crear la nueva versión de su nuevo sitio web “Energízate”. Por el momeno ellos no cuentan con una BD disponible para el ambiente de desarrollo y usted necesita comenzar a trabajar de inmediato. Usted procede de la siguiente forma:
+utilizar EF Core
+
+24
+La NASL {como la NASA, pero de otro país}, ha enviado su más reciente misión a Jupiter, para ello han utilizado un antiguo sitio web con Java applets para mostrarle al público el progreso de la exploración espacial. Este sitio esta hospedado en WebSphere. Esto porque la compañía le ha comprado un mainframe a IBM 15 años atrás y por otro lado sus ingenieros espaciales aprendieron a programa java en la universidad en los años 90. Sin embargo han contratado un nuevo grupo de desarrollo de software, todos ellos programan con ASP.Net core. Y aunque todos firmemente creen que pueden construir una nueva versión de la aplicación con ASP.Net core, definitivamente no pueden montarla en el antiguo mainframe y mucho menos en la versión de WebSpehere disponible, por lo que lo buscan a usted como consultor para que les indique que tipo de mainframe deben comprar y con que web server o middle ware para poder ejecutar su nueva aplicación hecha con ASP.Net Core. Usted les aconseja:
+No comprar servidor, crear cuenta gratis en Azure
+25
+Usted conoce ASP.Net core, actualmente trabaja para la compañía “Pantuflas Lulú” quien ha decido modernizar su plataforma web. Como Líder técnico del proyecto se le ha solicitado crear una aplicación piloto que le permita al Leadership Team determinar si vale la pena invertir o no en este proyecto. El propósito del proyecto es mejorar la plataforma web interna de la compañía, controlar la operación mejor de lo que se hacia. El piloto debe ser entregado mañana. ¿Qué haría usted para cumplir con lo solicitado?
+scaffolding
+
+26
+Startup.cs es el archivo que contiene las configuraciones e inicializaciones de la aplicación: Verdadero
+
+27
+NBC requiere cumplir con la regulación IPA, para llevar logs transaccionales de pagos con tarjeta de crédito en su plataforma. Usted es el encargado de crear un sitio web de administración para esta funcionalidad, sin embargo debido a la confidencialidad de los datos usted no tiene acceso a una base de datos real. Como usted necesita datos para trabajar, usted procede a:
+: Siembre de datos en el DataContext
+
+28
+Para crear una aplicación ASP.Net core mvc desde consola, usted hace uso de este comando: dotnet new mvc 
+
+29
+Este comando tiene un error ¿Cuál es?
+dotnet aspnet-codegenerator mvc controller -name AlumnoController
+-m Alumno -dc EscuelaContext
+–relativeFolderPath Controllers --useDefaultLayout
+–referenceScriptLibraries -f"
+: mvc antes de controller
+
+
+30 Incorrecto
+¿Cuál de estos dos comandos debo ejecutar en cada proyecto ASP.Net Core para incorporar la funcionalidad de Escaffolding?
+ninguna de las dos
+
+dotnet tool install -g dotnet-aspnet-codegenerator
+
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design

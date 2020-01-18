@@ -1,0 +1,5 @@
+{
+    "appService.preDeployTask": "publish-release",
+    "appService.deploySubpath": "",
+    "appService.defaultWebAppToDeploy": "/subscriptions/0f97a6ef-8fc3-4732-b4a7-b46992e8cfc4/resourceGroups/santiago/providers/Microsoft.Web/sites/platzi-asp-prueba"
+}
