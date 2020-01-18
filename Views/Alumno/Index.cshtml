@@ -1,20 +1,48 @@
-﻿@model Alumno
+﻿@model IEnumerable<Curso_de_ASP.NET_Core.Models.Alumno>
 
 @{
-    ViewData["Title"] = "Información Alumno";
-    Layout="Simple";
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section id="portafolio" class="portfolio">
-    <div class="Container">
-        <h2>@ViewData["Title"]</h2>     
-        <article class="project">
-                <h3 class="project-title"> <strong>@Model.Nombre </strong></h3>      
-                <div class="project-details">   
-                    <p>Alumno ID : @Model.Id</p>    
-                    <p class="project-description">CursoId : @Model.CursoId</p>
-                    <p class="project-description">Curso : @ViewBag.CursoNombre</p>
-                </div>
-        </article>
-    </div>
-</section>
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Curso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripicion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Curso.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripicion)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

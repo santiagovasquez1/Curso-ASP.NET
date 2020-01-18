@@ -1,0 +1,8 @@
+{
+  "Files": [
+    {
+      "InputPath": "Views/Asignatura/Index.edit.cshtml",
+      "OutputPath": "Views/Asignatura/Index.cshtml"
+    }
+  ]
+}

@@ -1,155 +1,159 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Curso_de_ASP.NET_Core.Models;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Curso_de_ASP.NET_Core.Models;
 
 namespace Curso_de_ASP.NET_Core.Controllers
 {
     public class AlumnoController : Controller
     {
-        private EscuelaContext _context;
-        [Route("Alumno/Index")]
-        [Route("Alumno/Index/{Id}")]
-        public IActionResult Index(string Id)
-        {
-            if (!string.IsNullOrWhiteSpace(Id))
-            {
-                var Alumno = _context.Alumnos.ToList().Find(x => x.Id == Id);
-                ViewBag.CursoNombre = _context.Cursos.ToList().Find(x => x.Id == Alumno.CursoId).Nombre;
-                return View(Alumno);
-            }
-            else
-            {
-                return View("MultiAlumno", _context.Alumnos);
-            }
-
-        }
-        public IActionResult MultiAlumno()
-        {
-            //var listaAlumno = GenerarAlumnosAlAzar(1500);
-            ViewBag.Fecha = DateTime.Now;
-            ViewBag.CosaDinamica = "La Monja";
-            return View("MultiAlumno", _context.Alumnos);
-        }
-
-        private List<Alumno> GenerarAlumnosAlAzar(int cantidad)
-        {
-            string[] nombre1 = { "Alba", "Felipa", "Eusebio", "Farid", "Donald", "Alvaro", "Nicolás" };
-            string[] apellido1 = { "Ruiz", "Sarmiento", "Uribe", "Maduro", "Trump", "Toledo", "Herrera" };
-            string[] nombre2 = { "Freddy", "Anabel", "Rick", "Murty", "Silvana", "Diomedes", "Nicomedes", "Teodoro" };
-
-            var listaAlumnos = from n1 in nombre1
-                               from n2 in nombre2
-                               from a1 in apellido1
-                               select new Alumno { Nombre = $"{n1} {n2} {a1}" };
-
-            return listaAlumnos.OrderBy((al) => al.Id).Take(cantidad).ToList();
-        }
-
-        #region Crear
-        public IActionResult Create()
-        {
-            ViewBag.Cursos = _context.Cursos.ToArray().Select(x => x.Id).ToArray();
-            ViewBag.Fecha = DateTime.Now;
-            return View("Create");
-        }
-
-        [HttpPost]
-        public IActionResult Create(Alumno alumno)
-        {
-            ViewBag.Fecha = DateTime.Now;
-
-            if (ModelState.IsValid)
-            {
-                _context.Alumnos.Add(alumno);
-                _context.SaveChanges();
-                ViewBag.Mensaje = "Alumno Creado";
-                ViewBag.CursoNombre = _context.Cursos.ToList().Find(x => x.Id == alumno.CursoId).Nombre;
-                return View("Index", alumno);
-            }
-            else
-            {
-                ViewBag.Cursos = _context.Cursos.ToArray().Select(x => x.Id).ToArray();
-                return View(alumno);
-            }
-
-        }
-        #endregion
-
-        #region  Editar
-        [Route("Alumno/Edit/{Id}")]
-        public IActionResult Edit(string Id)
-        {
-            if (!string.IsNullOrWhiteSpace(Id))
-            {
-                var Alumno = _context.Alumnos.ToList().Find(x => x.Id == Id);                 
-                ViewBag.Cursos = _context.Cursos.ToArray().Select(x => x.Id).ToArray();
-                return View("Edit", Alumno);
-            }
-            else
-            {
-                return Content("Los datos proporcionados no son suficientes");
-            }
-        }
-
-        [HttpPost]
-        [Route("Alumno/Edit/{alumnoId}")]
-        public IActionResult Edit(Alumno alumno, string alumnoId)
-        {
-            ViewBag.Fecha = DateTime.Now;
-
-            if (ModelState.IsValid)
-            {                
-                var cursoAlumno = _context.Cursos.ToList().Find(x => x.Id == alumno.CursoId);
-                alumno.Id = alumnoId;
-                alumno.Curso = cursoAlumno;
-                _context.Alumnos.Update(alumno);
-                _context.SaveChanges();
-                ViewBag.CursoNombre = _context.Cursos.ToList().Find(x => x.Id == alumno.CursoId).Nombre;
-                return View("Index", alumno);
-            }
-            else
-            {
-                return View("Edit", alumno);
-            }
-
-        }
-        #endregion
-
-        #region Eliminar
-        public IActionResult Eliminar(string alumnoId)
-        {
-            if (!string.IsNullOrWhiteSpace(alumnoId))
-            {
-                var Alumno = _context.Alumnos.ToList().Find(x => x.Id == alumnoId);
-                _context.Alumnos.Remove(Alumno);
-                _context.SaveChanges();
-                return View("MultiAlumno", _context.Alumnos);
-            }
-            else
-            {
-                return Content("Los datos proporcionados no son suficientes");
-            }
-
-        }
-
-
-        #endregion
-
-        private Alumno GetAlumno(string pAlumnoId)
-        {
-
-            var alumnosResults = from alumno in _context.Alumnos
-                                 where alumno.Id == pAlumnoId
-                                 select alumno;
-
-            return alumnosResults.SingleOrDefault();
-        }
+        private readonly EscuelaContext _context;
 
         public AlumnoController(EscuelaContext context)
         {
             _context = context;
+        }
+
+        // GET: Alumno
+        public async Task<IActionResult> Index()
+        {
+            var escuelaContext = _context.Alumnos.Include(a => a.Curso);
+            return View(await escuelaContext.ToListAsync());
+        }
+
+        // GET: Alumno/Details/5
+        public async Task<IActionResult> Details(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var alumno = await _context.Alumnos
+                .Include(a => a.Curso)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (alumno == null)
+            {
+                return NotFound();
+            }
+
+            return View(alumno);
+        }
+
+        // GET: Alumno/Create
+        public IActionResult Create()
+        {
+            ViewData["CursoId"] = new SelectList(_context.Cursos, "Id", "Id");
+            return View();
+        }
+
+        // POST: Alumno/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Nombre,CursoId,Id,Descripicion")] Alumno alumno)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(alumno);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["CursoId"] = new SelectList(_context.Cursos, "Id", "Id", alumno.CursoId);
+            return View(alumno);
+        }
+
+        // GET: Alumno/Edit/5
+        public async Task<IActionResult> Edit(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var alumno = await _context.Alumnos.FindAsync(id);
+            if (alumno == null)
+            {
+                return NotFound();
+            }
+            ViewData["CursoId"] = new SelectList(_context.Cursos, "Id", "Id", alumno.CursoId);
+            return View(alumno);
+        }
+
+        // POST: Alumno/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(string id, [Bind("Nombre,CursoId,Id,Descripicion")] Alumno alumno)
+        {
+            if (id != alumno.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(alumno);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!AlumnoExists(alumno.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["CursoId"] = new SelectList(_context.Cursos, "Id", "Id", alumno.CursoId);
+            return View(alumno);
+        }
+
+        // GET: Alumno/Delete/5
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var alumno = await _context.Alumnos
+                .Include(a => a.Curso)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (alumno == null)
+            {
+                return NotFound();
+            }
+
+            return View(alumno);
+        }
+
+        // POST: Alumno/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            var alumno = await _context.Alumnos.FindAsync(id);
+            _context.Alumnos.Remove(alumno);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool AlumnoExists(string id)
+        {
+            return _context.Alumnos.Any(e => e.Id == id);
         }
     }
 }

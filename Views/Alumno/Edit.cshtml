@@ -1,30 +1,45 @@
-﻿@model Alumno
+﻿@model Curso_de_ASP.NET_Core.Models.Alumno
 
 @{
-    ViewData["Title"] = "Información Alumno";
-    Layout="Simple";
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section id="portafolio" class="portfolio">
-    <div class="Container">
-        <h2>@ViewData["Title"]</h2>     
-        <article class="project">
-            <form class="Formulario" method="POST">
-                <div class="Form-Campos">
-                    <label asp-for="Nombre"></label>
-                    <input asp-for="Nombre"/>
-                </div>
-            <div class="Form-Campos">
-                <label asp-for="CursoId"></label>
-                @Html.DropDownList("CursoId",new SelectList(@ViewBag.Cursos),
-                                    "Seleccione Curso",
-                                    new {@class ="form-control"}            
-                                    )
+<h1>Edit</h1>
+
+<h4>Alumno</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
-            <div class="Form-Campos">
-                <button type="submit">Enviar</button>
+            <div class="form-group">
+                <label asp-for="CursoId" class="control-label"></label>
+                <select asp-for="CursoId" class="form-control" asp-items="ViewBag.CursoId"></select>
+                <span asp-validation-for="CursoId" class="text-danger"></span>
             </div>
-            </form>
-        </article>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Descripicion" class="control-label"></label>
+                <input asp-for="Descripicion" class="form-control" />
+                <span asp-validation-for="Descripicion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
-</section>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -28,6 +28,10 @@ namespace Curso_de_ASP.NET_Core
             services.AddControllersWithViews();
             services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Latest);
             services.AddDbContext<EscuelaContext>(options => options.UseInMemoryDatabase(databaseName: "testDb"));
+
+            //string connString = ConfigurationExtensions.GetConnectionString(this.Configuration, "DefaultConnection");
+            // string connection = ConfigurationExtensions.GetConnectionString(this.Configuration, "DefaultConnectionString");
+            // services.AddDbContext<EscuelaContext>(options => options.UseSqlServer(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -77,11 +77,11 @@ namespace Curso_de_ASP.NET_Core.Models
         private static List<Curso> CargarCursos(Escuela escuela)
         {
             var escCursos = new List<Curso>(){
-                        new Curso(){ Nombre = "101", Jornada = TiposJornada.Mañana ,EscuelaId=escuela.Id,Id=Guid.NewGuid().ToString()},
-                        new Curso() {Nombre = "201", Jornada = TiposJornada.Mañana,EscuelaId=escuela.Id,Id=Guid.NewGuid().ToString()},
-                        new Curso{Nombre = "301", Jornada = TiposJornada.Mañana,EscuelaId=escuela.Id,Id=Guid.NewGuid().ToString()},
-                        new Curso(){ Nombre = "401", Jornada = TiposJornada.Tarde,EscuelaId=escuela.Id,Id=Guid.NewGuid().ToString() },
-                        new Curso() {Nombre = "501", Jornada = TiposJornada.Tarde,EscuelaId=escuela.Id,Id=Guid.NewGuid().ToString()},
+                        new Curso(){ Nombre = "101",Direccion="Avenida siempre viva", Jornada = TiposJornada.Mañana ,EscuelaId=escuela.Id,Id=Guid.NewGuid().ToString()},
+                        new Curso() {Nombre = "201",Direccion="Avenida siempre viva", Jornada = TiposJornada.Mañana,EscuelaId=escuela.Id,Id=Guid.NewGuid().ToString()},
+                        new Curso{Nombre = "301",Direccion="Avenida siempre viva", Jornada = TiposJornada.Mañana,EscuelaId=escuela.Id,Id=Guid.NewGuid().ToString()},
+                        new Curso(){ Nombre = "401",Direccion="Avenida siempre viva", Jornada = TiposJornada.Tarde,EscuelaId=escuela.Id,Id=Guid.NewGuid().ToString() },
+                        new Curso() {Nombre = "501",Direccion="Avenida siempre viva", Jornada = TiposJornada.Tarde,EscuelaId=escuela.Id,Id=Guid.NewGuid().ToString()},
             };
 
             // Random rnd = new Random();
